@@ -1,0 +1,9 @@
+client/package-lock.json
+client/node_modules/
+client/dist/
+client/pkg/
+client/target/
+client/public/app.css
+server/Cargo.lock
+server/target/
+.DS_STORE
