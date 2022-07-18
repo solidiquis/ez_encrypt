@@ -6,4 +6,5 @@ client/target/
 client/public/app.css
 server/Cargo.lock
 server/target/
+server/.env
 .DS_STORE
