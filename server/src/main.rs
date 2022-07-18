@@ -4,7 +4,7 @@ use simple_logger::SimpleLogger;
 use std::str::FromStr;
 use std::path::PathBuf;
 
-const STATIC_ASSETS_PATH: &'static str = "../client/dist";
+const STATIC_ASSETS_PATH: &'static str = "./www";
 
 async fn index(req: HttpRequest) -> Result<fs::NamedFile> {
     let conn_info = req.connection_info();

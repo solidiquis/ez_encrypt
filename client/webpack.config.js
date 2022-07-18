@@ -44,7 +44,7 @@ module.exports = (env, args) => {
       ]
     },
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "..", "server", "www"),
         filename: isProductionMode ? "[name].[contenthash].js" : "[name].[hash].js",
     },
     experiments: {

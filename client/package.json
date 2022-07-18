@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "tailwindcss -i ./app/app.css -o ./dist/app.css --minify && webpack --mode production",
+    "build": "tailwindcss -i ./app/app.css -o ../server/www/app.css --minify && webpack --mode production",
     "dev": "webpack-dev-server --port 8080 --mode development & npx tailwindcss -i ./app/app.css -o ./public/app.css --watch"
   },
   "devDependencies": {
