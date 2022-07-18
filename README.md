@@ -4,5 +4,6 @@ A small and simple [Blowfish](https://www.schneier.com/academic/blowfish/) messa
 - The server is powered by [Actix](https://actix.rs/).
 - The UI is built on React, TypeScript, and TailwindCSS.
 - Cryptography computations are done purely client-side using Rust-targeted [WebAssembly](https://webassembly.org/). No user-input is sent to a remote server.
+- Uses the [Gruvbox color palette](https://github.com/YV31/gruvbox-css).
 
 <img src="https://github.com/solidiquis/solidiquis/blob/master/assets/ez_encrypt.png?raw=true">
