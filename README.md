@@ -1,4 +1,4 @@
-# [EZ Encrypt](http://ez-encrypt.com/)
+# [EZ Encrypt](https://ez-encrypt.herokuapp.com/)
 
 A small and simple [Blowfish](https://www.schneier.com/academic/blowfish/) message encryption + decryption web application. Here are some technical highlights:
 - The server is powered by [Actix](https://actix.rs/).
