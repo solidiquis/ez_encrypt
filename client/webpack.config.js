@@ -51,12 +51,16 @@ module.exports = (env, args) => {
       asyncWebAssembly: true,
     },
     devServer: {
-      static: { directory: path.join(__dirname, "public") },
+      static: {
+        directory: path.join(__dirname, "public"),
+        publicPath: "/static",
+      },
       hot: true
     },
     plugins: [
         new HtmlWebpackPlugin({
-          template: "./public/index.html"
+          template: "./public/index.html",
+          publicPath: isProductionMode ? "/static" : "/"
         }),
         new WasmPackPlugin({
           crateDirectory: path.resolve(__dirname, ".")
