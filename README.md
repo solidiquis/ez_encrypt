@@ -6,4 +6,6 @@ A small and simple [Blowfish](https://www.schneier.com/academic/blowfish/) messa
 - Cryptography computations are done purely client-side using Rust-targeted [WebAssembly](https://webassembly.org/). No user-input is sent to a remote server.
 - Uses the [Gruvbox color palette](https://github.com/YV31/gruvbox-css).
 
+[Click here](https://github.com/solidiquis/ez_encrypt/tree/master/client/src) for the interesting WASM stuff.
+
 <img src="https://github.com/solidiquis/solidiquis/blob/master/assets/ez_encrypt.png?raw=true">
