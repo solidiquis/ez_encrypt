@@ -47,26 +47,24 @@ export default () => {
 
     const intervalID = setInterval(() => (
       dispatch({ kind: ActionKind.SetComputingText })
-    ), 500);
+    ), 250);
 
-    setTimeout(() => {
-      try {
-        const result = (() => {
-          switch (mode) {
-            case CryptoMode.Encipher:
-              return encipher(text, key);
+    try {
+      const result = (() => {
+        switch (mode) {
+          case CryptoMode.Encipher:
+            return encipher(text, key);
 
-            case CryptoMode.Decipher:
-              return decipher(text, key);
-          }
-        })();
-        dispatch({ kind: ActionKind.SetResult, payload: { result: result } });
-      } catch (_e) {
-        dispatch({ kind: ActionKind.SetError, payload: { error: true } });
-      } finally {
-        clearInterval(intervalID);
-      }
-    }, 1500)
+          case CryptoMode.Decipher:
+            return decipher(text, key);
+        }
+      })();
+      dispatch({ kind: ActionKind.SetResult, payload: { result: result } });
+    } catch (_e) {
+      dispatch({ kind: ActionKind.SetError, payload: { error: true } });
+    } finally {
+      clearInterval(intervalID);
+    }
   };
 
   const cryptKeyChangeHandler = () => {
@@ -91,7 +89,7 @@ export default () => {
 
   return (
     <section
-      className="flex flex-col h-screen justify-center"
+      className="flex flex-col md:h-screen justify-center mt-12 md:mt-0"
       onClick={state.error ? errorMessageHandler : undefined}
     >
       <header className="text-center">
@@ -106,14 +104,14 @@ export default () => {
       >
         <p>Error: Invalid text and/or key provided.</p>
       </aside>
-      <article className="flex justify-center py-4">
-        <form onSubmit={submitHandler} className="flex flex-row md:flex-col md:space-y-5 space-x-4 md:space-x-0">
-          <div className="flex flex-col max-w-screen-md space-y-5">
+      <article className="flex justify-center py-4 px-2">
+        <form onSubmit={submitHandler} className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4 w-[400px] md:w-[768px]">
+          <div className="flex flex-col space-y-5 w-full md:w-6/12">
             <textarea
               ref={textInput}
               className={classNames(
                 "rounded-md outline-none resize-none bg-[color:var(--bgh)] p-2 caret-white text-[color:var(--aqua)]",
-                "w-96 h-32 placeholder-[color:var(--aqua)]",
+                "h-32 placeholder-[color:var(--aqua)]",
                 "border border-solid border-white",
                 "focus:border-[color:var(--green)]",
                 "md:w-full"
@@ -170,11 +168,11 @@ export default () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-col space-y-5 max-w-screen-md items-center">
+          <div className="flex flex-col space-y-5 items-center w-full md:w-6/12">
             <textarea
               className={classNames(
                 "rounded-md outline-none resize-none bg-[color:var(--bgh)] p-2 caret-white text-[color:var(--aqua)]",
-                "w-96 h-full placeholder-[color:var(--aqua)]",
+                "w-full h-32 md:h-full placeholder-[color:var(--aqua)]",
                 "border border-solid border-white",
                 "focus:border-[color:var(--green)]"
               )}
