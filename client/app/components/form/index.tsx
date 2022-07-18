@@ -120,6 +120,7 @@ export default () => {
               )}
               name="plain-text"
               placeholder="Message or cipher-text"
+              spellCheck={false}
             />
             <input
               ref={keyInput}
@@ -180,6 +181,7 @@ export default () => {
               value={state.result}
               name="cipher-text"
               disabled={true}
+              spellCheck={false}
             />
             <Clipboard
               className={classNames(
