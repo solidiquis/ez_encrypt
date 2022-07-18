@@ -30,7 +30,7 @@ async fn main() -> std::io::Result<()> {
     let host = if let Ok(h) = dotenv::var("HOST") {
         h
     } else {
-        "127.0.0.1".to_string()
+        "0.0.0.0".to_string()
     };
 
     let port = if let Ok(ref p) = dotenv::var("PORT") {
