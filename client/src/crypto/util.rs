@@ -4,21 +4,10 @@ pub(super) fn as_padded_bytes(plain_text: &str) -> Vec<u8> {
     let num_padding = 8 - plain_textb.len() % 8;
 
     if num_padding > 0 && num_padding < 8 {
-        for _ in 0..num_padding {
-            plain_textb.push(32);
-        }
+        plain_textb.resize(plain_textb.len() + num_padding, 32)
     }
     
     plain_textb
-}
-
-pub(super) fn to_u8_array(s: u32) -> [u8; 4] {
-    let b1 = ((s >> 24) & 0xff) as u8;
-    let b2 = ((s >> 16) & 0xff) as u8;
-    let b3 = ((s >> 8) & 0xff) as u8;
-    let b4 = (s & 0xff) as u8;
-
-    [b1, b2, b3, b4]
 }
 
 pub(super) fn to_hex_string(bytes: &[u8]) -> String {

@@ -1,7 +1,8 @@
 use actix_files as fs;
 use actix_web::{App, HttpServer, HttpRequest, web, Result};
 use simple_logger::SimpleLogger;
-use std::str::FromStr;
+use std::io;
+use std::net::{Ipv4Addr, SocketAddrV4};
 use std::path::PathBuf;
 
 const STATIC_ASSETS_PATH: &'static str = "./www";
@@ -22,27 +23,30 @@ fn config(cfg: &mut web::ServiceConfig) {
 }
 
 #[actix_web::main]
-async fn main() -> std::io::Result<()> {
+async fn main() -> io::Result<()> {
     dotenv::dotenv().ok();
 
     SimpleLogger::new().with_level(log::LevelFilter::Info).init().unwrap();
 
-    let host = if let Ok(h) = dotenv::var("HOST") {
-        h
-    } else {
-        "0.0.0.0".to_string()
-    };
+    let host = dotenv::var("HOST")
+        .map(|host_str| {
+            host_str
+                .parse::<Ipv4Addr>()
+                .unwrap_or(Ipv4Addr::new(0, 0, 0, 0))
+        })
+        .unwrap();
 
-    let port = if let Ok(ref p) = dotenv::var("PORT") {
-        u16::from_str(p).unwrap()
-    } else {
-        3000
-    };
+    let port = dotenv::var("PORT")
+        .unwrap_or("3000".to_string())
+        .parse::<u16>()
+        .unwrap();
 
-    log::info!("Listening on tcp://{}:{}", &host, &port);
+    let socketaddr = SocketAddrV4::new(host, port);
+
+    log::info!("Listening on tcp://{}", &socketaddr);
 
     HttpServer::new(|| App::new().configure(config))
-        .bind((host, port))?
+        .bind(socketaddr)?
         .run()
         .await
 }

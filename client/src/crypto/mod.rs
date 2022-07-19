@@ -10,7 +10,7 @@ mod test;
 pub fn encipher(plain_text: &str, key: &str) -> Result<String, error::Error> {
     let keyb = key.as_bytes();
 
-    if let Err(e) = validate_key(keyb) { return Err(e) }
+    validate_key(keyb)?;
 
     let plain_textb = util::as_padded_bytes(plain_text);
 
@@ -19,16 +19,16 @@ pub fn encipher(plain_text: &str, key: &str) -> Result<String, error::Error> {
     let mut cipher_text_bytes: Vec<u8> = vec![];
 
     for block in plain_textb.chunks(8) {
-        let lblock = block[0..4].to_owned();
-        let rblock = block[4..8].to_owned();
+        let lblock: [u8; 4] = block[0..4].try_into().expect("selected four bytes");
+        let rblock: [u8; 4] = block[4..8].try_into().expect("selected four bytes");
 
-        let [lenc_block, renc_block] = bf.bc_encrypt([
-            u32::from_be_bytes(lblock.try_into().unwrap()),
-            u32::from_be_bytes(rblock.try_into().unwrap())
-        ]);
+         let [lenc_block, renc_block] = bf.bc_encrypt([ 
+             u32::from_be_bytes(lblock), 
+             u32::from_be_bytes(rblock) 
+         ]); 
 
-        cipher_text_bytes.extend_from_slice(&util::to_u8_array(lenc_block));
-        cipher_text_bytes.extend_from_slice(&util::to_u8_array(renc_block));
+        cipher_text_bytes.extend_from_slice(&u32::to_be_bytes(lenc_block));
+        cipher_text_bytes.extend_from_slice(&u32::to_be_bytes(renc_block));
     }
 
     let cipher_text = util::to_hex_string(&cipher_text_bytes);
