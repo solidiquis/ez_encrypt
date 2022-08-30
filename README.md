@@ -1,5 +1,8 @@
 # [EZ Encrypt](https://ez-encrypt.herokuapp.com/)
 
+**Disclaimer**:
+This is a fun a little app to help people pass simple encrypted messages around and should not be used for production purposes. This algorithm leveraged is Blowfish and follows the [ECB](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Electronic_codebook_(ECB)) schema which is simple, yet problematic, as identical blocks will generate identical cipher text.
+
 A small and simple [Blowfish](https://www.schneier.com/academic/blowfish/) message encryption + decryption web application. Here are some technical highlights:
 - The server is powered by [Actix](https://actix.rs/).
 - The UI is built on React, TypeScript, and TailwindCSS.
